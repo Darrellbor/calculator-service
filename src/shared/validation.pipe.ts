@@ -12,10 +12,7 @@ import { plainToClass } from 'class-transformer';
 export class ValidationPipe implements PipeTransform {
   async transform(value: any, metadata: ArgumentMetadata) {
     if (value instanceof Object && this.isEmpty(value)) {
-      throw new HttpException(
-        'Validation failed: No body submitted',
-        HttpStatus.BAD_REQUEST,
-      );
+      throw new HttpException('Validation failed: No body submitted', HttpStatus.BAD_REQUEST);
     }
     const { metatype } = metadata;
     if (!metatype || !this.toValidate(metatype)) {
@@ -26,7 +23,7 @@ export class ValidationPipe implements PipeTransform {
     if (errors.length > 0) {
       throw new HttpException(
         `Validation failed: ${this.formatErrors(errors)}`,
-        HttpStatus.BAD_REQUEST,
+        HttpStatus.BAD_REQUEST
       );
     }
     return value;
@@ -34,12 +31,12 @@ export class ValidationPipe implements PipeTransform {
 
   private toValidate(metatype): boolean {
     const types = [String, Boolean, Number, Array, Object];
-    return !types.find((type) => metatype === type);
+    return !types.find(type => metatype === type);
   }
 
   private formatErrors(errors: any[]) {
     return errors
-      .map((err) => {
+      .map(err => {
         for (const property in err.constraints) {
           return err.constraints[property];
         }
