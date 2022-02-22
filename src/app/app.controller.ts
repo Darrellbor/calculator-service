@@ -7,6 +7,11 @@ import { CalculateQueryDTO } from '../shared/general.dto';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
+  @Get()
+  welcome() {
+    return { message: 'Welcome to Calculator Service API' };
+  }
+
   @Get('calculus')
   calculate(
     @Query(
