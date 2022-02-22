@@ -1,7 +1,7 @@
 import { Controller, Get, Query, ValidationPipe as QueryValidationPipe } from '@nestjs/common';
 
 import { AppService } from './app.service';
-import { CalculateQueryDTO } from 'shared/general.dto';
+import { CalculateQueryDTO } from '../shared/general.dto';
 
 @Controller({ version: '1' })
 export class AppController {
